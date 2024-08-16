@@ -60,24 +60,10 @@
 }
 
 @layer base {
-  /* Estilos globais de botão */
-  button, input[type="button"], input[type="submit"] {
-    @apply px-4 py-2 font-semibold text-white bg-blue-500 rounded-md;
-    @apply border-none outline-none focus:outline-none;
-    @apply transition-colors duration-200 ease-in-out;
-
-    /* Para remover as bordas e a outline do botão */
-    border: none;
-    outline: none;
-
-    /* Pode adicionar a cor e estilo desejado quando o botão estiver focado */
-    &:focus {
-      box-shadow: none;
-    }
+  * {
+    @apply border-border;
   }
-
-  /* Estilização para botões desativados */
-  button:disabled, input[type="button"]:disabled, input[type="submit"]:disabled {
-    @apply bg-gray-300 cursor-not-allowed;
+  body {
+    @apply bg-background text-foreground;
   }
 }

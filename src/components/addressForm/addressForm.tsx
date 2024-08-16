@@ -25,13 +25,7 @@ const formSchema = z.object({
   observation: z.string(),
 })
 
-
-interface FormAddressProps {
-  onNext: () => void;
-  onPrev: () => void;
-}
-
-export default function FormAddress({ onNext, onPrev }: FormAddressProps) {
+export default function AddressForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,13 +42,13 @@ export default function FormAddress({ onNext, onPrev }: FormAddressProps) {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
-    onNext()
   }
     return  (
       <div>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[90%]">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <h2>Endereço</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="cep"
@@ -62,7 +56,7 @@ export default function FormAddress({ onNext, onPrev }: FormAddressProps) {
                 <FormItem>
                   <FormLabel>Cep</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="Digite seu email" {...field} />
+                    <Input type="text" placeholder="Digite seu cep" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -75,7 +69,7 @@ export default function FormAddress({ onNext, onPrev }: FormAddressProps) {
                 <FormItem>
                   <FormLabel>Rua</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="Digite seu telefone" {...field} />
+                    <Input type="text" placeholder="Rua" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -101,7 +95,7 @@ export default function FormAddress({ onNext, onPrev }: FormAddressProps) {
                 <FormItem>
                   <FormLabel>Estado</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="Digite seu RG" {...field} />
+                    <Input type="text" placeholder="Estado" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -114,7 +108,7 @@ export default function FormAddress({ onNext, onPrev }: FormAddressProps) {
                 <FormItem>
                   <FormLabel>Número</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="Digite seu estado civil" {...field} />
+                    <Input type="text" placeholder="número" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -127,7 +121,7 @@ export default function FormAddress({ onNext, onPrev }: FormAddressProps) {
                 <FormItem>
                   <FormLabel>Complemento</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="Digite seu gênero" {...field} />
+                    <Input type="text" placeholder="Complemento" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -140,16 +134,12 @@ export default function FormAddress({ onNext, onPrev }: FormAddressProps) {
                 <FormItem>
                   <FormLabel>Observação</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite o nome da sua mãe" {...field} />
+                    <Input placeholder="Observação" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            </div>
-            <div className="flex justify-end gap-4">
-            <Button onClick={onPrev} >Voltar</Button>
-            <Button type="submit">Salvar</Button>
             </div>
           </form>
         </Form>

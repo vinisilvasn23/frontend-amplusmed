@@ -15,6 +15,7 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import { useForm } from "react-hook-form"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 const formSchema = z.object({
   name: z.string(),
   email: z.string(),
@@ -29,12 +30,7 @@ const formSchema = z.object({
   status: z.string(),
 })
 
-interface FormProfessionalProps {
-  onNext: () => void;
-  onPrev: () => void;
-}
-
-export default function FormProfessional({ onNext, onPrev }: FormProfessionalProps) {
+export default function ProfessionalForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,14 +50,17 @@ export default function FormProfessional({ onNext, onPrev }: FormProfessionalPro
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
-    onNext()
   }
     return  (
       <div>
-        <div></div>
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[90%]">
+          <div className="flex justify-between">
+          <h2>Dados do Profissional</h2>
+          </div>
+        <div className="flex gap-8">
+          <div className="flex gap-4 flex-col">
+          <div className="bg-slate-400 rounded-full w-48 h-48"></div>
            <FormField
               control={form.control}
               name="name"
@@ -127,6 +126,8 @@ export default function FormProfessional({ onNext, onPrev }: FormProfessionalPro
                 </FormItem>
               )}
             />
+          </div>
+          <div className="flex gap-4 flex-col">
             <FormField
               control={form.control}
               name="marital_status"
@@ -197,18 +198,23 @@ export default function FormProfessional({ onNext, onPrev }: FormProfessionalPro
               name="status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Status</FormLabel>
+                  <FormLabel>Selecione a situação</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="Digite o status" {...field} />
+                  <Select>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Situação" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">Ativo</SelectItem>
+                      <SelectItem value="2">Inativo</SelectItem>
+                    </SelectContent>
+                  </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             </div>
-            <div className="flex justify-end gap-4">
-            <Button>voltar</Button>
-            <Button type="submit">Salvar</Button>
             </div>
           </form>
         </Form>

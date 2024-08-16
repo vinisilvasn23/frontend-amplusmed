@@ -26,7 +26,7 @@ export default function RootLayout({
               fontSans.variable,
             )}
           >
-            <div className="min-h-screen">{children}</div>
+            <div className="min-h-screen w-screen overflow-x-hidden">{children}</div>
           </body>
     </html>
   )
